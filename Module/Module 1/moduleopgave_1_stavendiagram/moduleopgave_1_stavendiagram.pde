@@ -8,33 +8,50 @@ float staafA = 20.0;
 float staafB = 190.0;
 float staafC = 150.0;
 
-// hieronder komt jouw code
+// hieronder komt jouw code.
 
-// Kleuren voor iedere staaf
-color kleurA = color(0, 0, 255);
-color kleurB = color(0, 255, 0);
-color kleurC = color(255, 0, 0);
+// Alle benodigde kleuren in een array.
+color[] kleuren = {
+  color(0, 0, 255), // staaf A
+  color(0, 255, 0), // staaf B
+  color(255, 0, 0), // staaf C
+  color(255, 69, 0) // gemiddelde
+};
 
-// x-coordinaten
-int xA = ((width / 7) * 2);
-int xB = ((width / 7) * 4);
-int xC = ((width / 7) * 6);
+// Een variabele voor de gemiddelde van de lengte van alle staven.
+float average = (staafA + staafB + staafC) / 3;
+
+// Zoomfactor
+float zoomfactor = 1;
 
 void setup() {
   
+  // Hier zit de setup want volgens Processing moet ik het hier neerzetten anders
+  // werkt het niet.
   size(500, 200);
-  
   background(0);
-  noStroke();
   
-  drawBar(xA, kleurA, staafA);
-  drawBar(xB, kleurB, staafB);
-  drawBar(xC, kleurC, staafC);
-
+  // Zoomfactor indicator
+  fill(255);
+  textSize(10);
+  text("Zoomfactor: " + zoomfactor, width / 20, height / 10);
+  
+  drawBar((width / 7), kleuren[0], staafA);
+  drawBar((width / 7) * 3, kleuren[1], staafB);
+  drawBar((width / 7) * 5, kleuren[2], staafC);
+  
+  stroke(kleuren[3]);
+  fill(kleuren[3]);
+  line(0, height - average, width, height - average);
+  textSize(12);
+  text(average, width / 10, height - average - 1);
+  
 }
 
-// Een functie om staven te maken
-void drawBar(int x, color c, float l) {
-  fill(c);
-  rect(x, height, width / 7, -l);
+// Een functie om de staven te tekenen zodat ik het niet drie keer te programmeren.
+void drawBar(int x, color kleur, float lengte) {
+  fill(kleur);
+  rect(x, height, width / 7, -lengte);
+  textSize(12);
+  text(lengte, x, height - lengte);
 }
