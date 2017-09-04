@@ -18,11 +18,11 @@ color[] kleuren = {
   color(255, 69, 0) // gemiddelde
 };
 
+// zoomFactor, gaat automatisch veranderen wanneer een staaf groter is dan de verticale-as.
+float zoomFactor = 1.0;
+
 // Een variabele voor de gemiddelde van de lengte van alle staven.
 float average = (staafA + staafB + staafC) / 3;
-
-// Zoomfactor
-float zoomfactor = 1;
 
 void setup() {
   
@@ -30,11 +30,23 @@ void setup() {
   // werkt het niet.
   size(500, 200);
   background(0);
+  textSize(12);
   
+  // Check de lengte van elke staven
+  if (staafA >= (height - 10)) {
+    zoomFactor = (height - 10) / staafA;
+  } 
+  if (staafB >= (height - 10)) {
+    zoomFactor = (height - 10) / staafB;
+  } 
+  if (staafC >= (height - 10)) {
+    zoomFactor = (height - 10) / staafC;
+  }
+   
   // Zoomfactor indicator
   fill(255);
   textSize(10);
-  text("Zoomfactor: " + zoomfactor, width / 20, height / 10);
+  text("Zoomfactor: " + zoomFactor, 4, 12);
   
   drawBar((width / 7), kleuren[0], staafA);
   drawBar((width / 7) * 3, kleuren[1], staafB);
@@ -42,16 +54,14 @@ void setup() {
   
   stroke(kleuren[3]);
   fill(kleuren[3]);
-  line(0, height - average, width, height - average);
-  textSize(12);
-  text(average, width / 10, height - average - 1);
+  line(0, height - average * zoomFactor, width, height - average * zoomFactor);
+  text(average, width / 10, (height - average * zoomFactor) - 1);
   
 }
 
-// Een functie om de staven te tekenen zodat ik het niet drie keer te programmeren.
+// Een functie om de staven te tekenen zodat ik het niet drie keer hoef te programmeren.
 void drawBar(int x, color kleur, float lengte) {
   fill(kleur);
-  rect(x, height, width / 7, -lengte);
-  textSize(12);
-  text(lengte, x, height - lengte);
+  rect(x, height, width / 7, -lengte * zoomFactor);
+  text(lengte, x, height - lengte * zoomFactor);
 }
