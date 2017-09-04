@@ -1,4 +1,4 @@
-println("Hard coded");
+/*println("Hard coded");
 
 println("89 + 17 = ", (89 + 17));
 println("125 - 23 = ", (125 - 23));
@@ -8,6 +8,7 @@ println("45 / 7 = ", (45 / 7));
 println("45.0 / 7 = ", (45.0 / 7));
 
 println("\nNu met een float array");
+*/
 
 float[] antwoorden = {
   (int)(89 + 17),
@@ -18,17 +19,23 @@ float[] antwoorden = {
   45.0 / 7
 };
 
-for (int i = 0; i < antwoorden.length; i++) {
-  println(antwoorden[i]);
-}
-
-/*void setup() {
+void setup() {
   size(640, 480);
-  background(0);
-  color(255);
-  fill(255);
+  background(255);
+  stroke(5);
+  fill(0);
+  color(0);
+  
+  textSize(16);
+  for(int i = 0; i < antwoorden.length; i++) {
+    text(antwoorden[i], 16, 16 * (i + 1));
+  }
 }
 
 void draw() {
   
+}
+
+/*for (int i = 0; i < antwoorden.length; i++) {
+  println(antwoorden[i]);
 }*/
