@@ -5,7 +5,7 @@
 
 // Staven (deze waardes kunnen veranderen)
 float staafA = 20.0;
-float staafB = 190.0;
+float staafB = 650.0;
 float staafC = 150.0;
 
 // hieronder komt jouw code.
@@ -18,6 +18,13 @@ color[] kleuren = {
   color(255, 69, 0) // gemiddelde
 };
 
+// Bekijk welk staaf het hoogst
+float maximum = max(staafA, staafB, staafC);
+
+// Text-margin
+int textSize = 12;
+int textMargin;
+
 // zoomFactor, gaat automatisch veranderen wanneer een staaf groter is dan de verticale-as.
 float zoomFactor = 1.0;
 
@@ -28,19 +35,14 @@ void setup() {
   
   // Hier zit de setup want volgens Processing moet ik het hier neerzetten anders
   // werkt het niet.
-  size(500, 200);
+  size(1000, 500);
   background(0);
-  textSize(12);
+  textSize(textSize);
+  textMargin = height - textSize;
   
   // Check de lengte van elke staven
-  if (staafA >= (height - 10)) {
-    zoomFactor = (height - 10) / staafA;
-  } 
-  if (staafB >= (height - 10)) {
-    zoomFactor = (height - 10) / staafB;
-  } 
-  if (staafC >= (height - 10)) {
-    zoomFactor = (height - 10) / staafC;
+  if (maximum >= textMargin) {
+    zoomFactor = textMargin / maximum;
   }
    
   // Zoomfactor indicator

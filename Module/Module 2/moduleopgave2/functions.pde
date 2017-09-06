@@ -32,5 +32,3 @@ float leesLengte() {
 float leesGewicht() { 
   return nb2.getValue();
 }
-
-
