@@ -7,6 +7,7 @@ ControlP5 theControl;
 
 int barWidth, barX, 
     textMargin = 10;
+    
 float gridY,
       maxGrid = 100, // Zorgt dat de y-as van 0 tot 100 is, zodat de lengte zichtbaar zijn
       BMI;
@@ -21,7 +22,7 @@ float max_onderGewicht = 18.5,
       max_overGewicht = 30;
 
 void setup() {
-  size(400, 350);
+  size(800, 700);
   theControl = new ControlP5(this);
   createNumberBoxes(theControl);
   
@@ -85,7 +86,7 @@ void draw() {
 }
 
 // BMI bereken
-float berekenBMI(float g, float l) {
-  l = l / 100;      // Van cm naar m
-  return g / sq(l); // BMI = gewicht(kg) / lengte^2(m^2)
+float berekenBMI(float gewichtInKg, float lengteInCm) {
+  float lengteInM = lengteInCm / 100;      // Van cm naar m
+  return gewichtInKg / sq(lengteInM); // BMI = gewicht(kg) / lengte^2(m^2)
 }
