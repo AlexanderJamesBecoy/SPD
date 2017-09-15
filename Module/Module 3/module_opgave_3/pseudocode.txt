@@ -1,0 +1,77 @@
+Eerst ga ik wat variabelen definieren:
+- Een int voor het lengte van de robotje en de vracht en dat wordt
+gezet in breedte en lengte, want het moet als een vierkant voorstellen.
+Dus elke zijde hebben dezelfde lengte.
+- Nog een int voor de x- en y-coordinaten van de robot en de vracht.
+- Een boolean dat zorgt dat de robot de vracht heeft gepakt.
+Die zetten we eerst gelijk aan false, want de auto heeft het natuurlijk nog
+niet opgepakt.
+
+
+/* Setup */
+ik geef de waarde van de x- en y-waarde van de robot en de vracht, en de
+lengte van de zijde in de setup, want de width en height wordt pas
+gedefinieerd in de setup als size().
+
+De robot moet in de map bewegen van ene blokje naar andere blokje. Dus deel
+ik de map in grids.
+Ik wil dat de grid 10x10 is, dus moet de width en height van de map even
+zijn. Ook moet de lengte van de zijde 1/10e van de width/height van de
+kamer.
+
+De robot begint in het midden van de map, dus de x- en y-waarde wordt:
+	- x-positie = de breedte van de map gedeeld door 2.
+	- y-positie = de lengte vand de map gedeeld door 2.
+
+Ik wil de x- en y-waarde van de vracht willekeurig hebben, dus maak ik
+gebruik van de random() function. Vanuit de reference op processing.org
+weet ik dat de random() een float function is, dus met behulp van (int)
+kan ik het omzetten naar een int-waarde.
+
+Random werkt als van 0 tot en met het getal die je in de functie opnoemt, 
+en de grid gaat van 10x10. De lengte van de zijde vermenigvuldig met de
+de int-waarde van random(de maximale gridwaarde).
+
+/* Draw */
+We willen niet dat er continu tekeningen blijven staan, dus zetten we de
+background in de draw function.
+
+We zetten de vorm van de robotje hierin zodat het ook kan bewegen. De functie
+rect bestaat uit voor vier parameters:
+De x-positie, y-positie, de breedte en de lengte.
+- De x- en y-positie staat gelijk aan de x- en y-variabelen van de robotje; en
+- De breedte en de lengte staat gelijk aan de variabele van de lengte van de
+zijde.
+
+Dit geldt hetzelfde voor de vracht. Alleen wat anders is de x- en y-variabelen
+en i.p.v. rect() maken we dan gebruik van ellipse(). Omdat de vracht de vorm
+van een cirkel moet hebben.
+Maar de x- en y-waarde van een ellipse() is alvast gecentreerd. Dus op de
+reference heb ik de functie ellipseMode() gevonden zodat de x- en y-positie
+linksboven staat en dat het als een rect() gedraagt.
+
+Het laatst in de draw function maken we gebruik van een if-statement om te
+kijken of het vracht gepakt is.
+Als de boolean waar is, staat de x- en y-waarde van de vracht gelijk aan
+de x- en y-waarde van de robotje.
+
+/* keyboard */
+De robot moet per grid kunnen bewegen, dus maken we gebruik van de lengte
+van de zijde als de hoeveelheid om te bewegen; bijv.
+- als de linkertoets gedrukt wordt, gaat er de lengte van de zijde eraf in
+de x-variabele van de robotje.
+- als de rechtertoets gedrukt wordt, gaat er de lengte van de zije erbij in
+de x-variable van de robotje.
+- Hetzelfde geldt voor de boventoets en ondertoets, maar dan in de y-as.
+
+Op een voorwaarde, de robotje moet niet buiten de map kunnen komen.
+Dus zorgen we statements bij elke toets-pijlen, b.v. 
+- als de linkertoets wordt gedrukt en dat de x-waarde van x-positie van de 
+robotje groter dan 0 is, dan kan het naar links bewegen.
+- Als de rechtertoets wordt gedrukt en dat de x-waarde van x-positie van de
+robotje kleiner is dan de breedte van de map, dan kan het naar rechts
+bewegen.
+
+Als enter wordt gedrukt dan heeft de boolean de tegenoverstelde waarde.
+- If true, then false.
+- If false, then true.
