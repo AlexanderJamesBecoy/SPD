@@ -105,15 +105,19 @@ void mousePressed() {
       if (targetClicking(1)) {
         precision = 4;
         aantalScore += 4;
+      // +3 punten
       } else if (targetClicking(2)) {
         precision = 3;
         aantalScore += 3;
+      // +2 punten
       } else if (targetClicking(3)) {
         precision = 2;
         aantalScore += 2;
+      // +1 punten
       } else if (targetClicking(4)) {
         precision = 1;
         aantalScore++;
+      // Mis
       } else {
         precision = 0;
         aantalMis++;
