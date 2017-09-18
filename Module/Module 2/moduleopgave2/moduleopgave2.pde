@@ -47,22 +47,13 @@ void draw() {
   
   // Hier zitten de lijnen
   // Ondergewicht
-  stroke(red);
-  line(0, height - max_onderGewicht * gridY, width, height - max_onderGewicht * gridY);
-  fill(red);
-  text("Ondergewicht", 10, (height - max_onderGewicht * gridY) + textMargin);
+  bmiLijn(max_onderGewicht, red, "Ondergewicht");
   
   // Normaal gewicht
-  stroke(green);
-  line(0, height - max_normaalGewicht * gridY, width, height - max_normaalGewicht * gridY);
-  fill(green);
-  text("Normaal gewicht", 10, (height - max_normaalGewicht * gridY) + textMargin);
+  bmiLijn(max_normaalGewicht, green, "Normaal gewicht");
   
   // Overgewicht
-  stroke(red);
-  line(0, height - max_overGewicht * gridY, width, height - max_overGewicht * gridY);
-  fill(red);
-  text("Overgewicht", 10, (height - max_overGewicht * gridY) + textMargin);
+  bmiLijn(max_overGewicht, red, "Overgewicht");
   
   // Obees
   text("Obees", 10, (height - max_overGewicht * gridY) - 2);
@@ -89,4 +80,11 @@ void draw() {
 float berekenBMI(float gewichtInKg, float lengteInCm) {
   float lengteInM = lengteInCm / 100;      // Van cm naar m
   return gewichtInKg / sq(lengteInM); // BMI = gewicht(kg) / lengte^2(m^2)
+}
+
+void bmiLijn(float gewichtInKg, color kleur, String bmiData) {
+  stroke(kleur);
+  line(0, height - gewichtInKg * gridY, width, height - gewichtInKg * gridY);
+  fill(kleur);
+  text(bmiData, 10, (height - gewichtInKg * gridY) + textMargin);
 }

@@ -14,5 +14,7 @@ void setup() {
 }
 
 void begroet(String naam, int x, int y) {
-  text("Hallo " + naam + ", hoe gaat het met je?", x, y);
+  String groet = "Hallo, ";
+  String vraag = ". hoe gaat het met je?";
+  text(groet + naam + vraag, x, y);
 }
