@@ -5,18 +5,24 @@
 import controlP5.*;
 ControlP5 theControl;
 
+// Het breedte and de x-waarde van de BMI-staaf wordt bepaalt door de grootte van
+// de x-waarde van de windows.
 int barWidth, barX, 
     textMargin = 10;
     
-float gridY,
-      maxGrid = 100, // Zorgt dat de y-as van 0 tot 100 is, zodat de lengte zichtbaar zijn
-      BMI;
+// Met de gridY variabele zorgt dat de lijnen en de BMI-staaf op elke y-waarde van
+// de windows mee scalet.
+float gridY, 
+      maxGrid = 100, // 100%
+      BMI;           // De variabele voor BMI
 
+// Variabelen van elke benodigde kleuren.
 color red = color(255, 0, 0),
       orange = color(255, 60, 0),
       green = color(0, 255, 0),
       white = color(255, 255, 255);
 
+// Data van de BMI.
 float max_onderGewicht = 18.5,
       max_normaalGewicht = 25,
       max_overGewicht = 30;
@@ -30,7 +36,6 @@ void setup() {
   barX = (width / 2) - (barWidth / 2);
   
   gridY = height / maxGrid;
-  
   textSize(textMargin);
 }
 
@@ -39,11 +44,9 @@ void draw() {
   println("lengte:" + leesLengte());
   println("gewicht: " + leesGewicht());
   println("BMI: " + berekenBMI(leesGewicht(), leesLengte()));
-  BMI = berekenBMI(leesGewicht(), leesLengte());
   
-  noStroke();
-  fill(orange);
-  rect(barX, height, barWidth, -BMI * gridY);
+  // De BMI wordt berekend door de functie.
+  BMI = berekenBMI(leesGewicht(), leesLengte());
   
   // Hier zitten de lijnen
   // Ondergewicht
@@ -67,15 +70,20 @@ void draw() {
   // Obees
   text("Obees", 10, (height - max_overGewicht * gridY) - 2);
   
+  // De BMI-staaf
+  noStroke();
+  fill(orange);
+  rect(barX, height, barWidth, -BMI * gridY);
+  
   // BMI-Indicator (extraatjes)
   fill(white);
-  text("BMI: " + (int)BMI, 10, height - (textMargin * 2));
-  if(BMI < 18.5) {
+  text("BMI: " + BMI, 10, height - (textMargin * 2));
+  if(BMI < max_onderGewicht) {
     fill(red);
     text("U heeft ondergewicht!", 10, height - textMargin);
-  } else if(BMI >= 18.5 && BMI < 25) {
+  } else if(BMI >= max_onderGewicht && BMI < max_normaalGewicht) {
     text("U heeft normaal gewicht.", 10, height - textMargin);
-  } else if(BMI >= 25 && BMI < 30) {
+  } else if(BMI >= max_normaalGewicht && BMI < max_overGewicht) {
     fill(orange);
     text("U heeft overgewicht.", 10, height - textMargin);
   } else {
