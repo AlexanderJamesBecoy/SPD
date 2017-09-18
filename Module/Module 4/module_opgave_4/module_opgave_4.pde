@@ -3,7 +3,7 @@
 // 18-9-2017
 
 /*========================
-     Global scopes
+ Global scopes
 /*========================*/
 
 // Variabelen voor de start-knop
@@ -27,19 +27,21 @@ int textSize = 16;
 
 // Kleuren in variabelen.
 color white = #ffffff, 
-      red = #ff0000, 
-      green = #00ff00, 
-      blue = #0000ff, 
-      black = #000000;
+  red = #ff0000, 
+  green = #00ff00, 
+  blue = #0000ff, 
+  black = #000000;
 
 // Check of de game start of stopt.
 boolean gameState = false;
 
 // Houdt het aantal score en mis.
 int aantalScore, aantalMis;
+// Een variabele voor de waarde waar jij op de doelwit heeft geklikt.
+int precision = -1;
 
 /*========================
-         Setup()
+ Setup()
 /*========================*/
 void setup() {
   size(500, 500);
@@ -51,13 +53,13 @@ void setup() {
   startHeight = cellSize;
   startX = width / 2;
   startY = height - (startHeight / 2);
-  
+
   smooth();
 }
 
 /*========================
-         Draw()
-========================*/
+ Draw()
+ ========================*/
 void draw() {
   background(black);
   // De y-waarde van de doelwit wordt bepaald door de sinus-functie en het aantal t;
@@ -85,39 +87,51 @@ void draw() {
 
   // Teken het aantal score en mis.
   drawScore();
-  
+
   // Zorgt dat de y-waarde van de doelwit in een sinus-golf beweegt.
   t++;
 }
 
 /*========================
-     mousePressed()
-========================*/
+ mousePressed()
+ ========================*/
 void mousePressed() {
 
   // Target, check of de game gestart is of niet.
   if (gameState) {
+    // Bekijk of de muis niet over de start-knop is
     if (!checkMouse(startX, startWidth, startY, startHeight)) {
-      if (checkMouse(targetX, cellSize, targetY, cellSize)) {
+      // Als de muis op de bullseye klikt, plus 4 punten
+      if (targetClicking(1)) {
+        precision = 4;
+        aantalScore += 4;
+      } else if (targetClicking(2)) {
+        precision = 3;
+        aantalScore += 3;
+      } else if (targetClicking(3)) {
+        precision = 2;
+        aantalScore += 2;
+      } else if (targetClicking(4)) {
+        precision = 1;
         aantalScore++;
       } else {
+        precision = 0;
         aantalMis++;
       }
     }
   }
-  
+
   // Game State
   // Verander de game state van START naar STOP, en andersom.
   if (checkMouse(startX, startWidth / 2, startY, startHeight / 2)) {
-      gameState = !gameState;
-      if(gameState) startTargetX();
+    gameState = !gameState;
+    if (gameState) startTargetX();
   }
-  
 }
 
 /*========================
-   Custom functions()
-========================*/
+ Custom functions()
+ ========================*/
 
 // Tekent de start-knop.
 void drawPower(String power) {
@@ -134,12 +148,12 @@ void drawPower(String power) {
 void drawTarget(float x, float y) {
   ellipseMode(CENTER);
   for (int i = 4; i > 0; i--) {
-    if(i % 2 == 0) {
+    if (i % 2 == 0) {
       fill(red);
     } else {
       fill(white);
     }
-    ellipse(x,y, cellSize / 4 * i, cellSize / 4 * i);
+    ellipse(x, y, cellSize / 2 * i, cellSize / 2 * i);
   }
 }
 
@@ -150,7 +164,7 @@ void moveTargetX() {
   } else {
     targetX -= 2;
   }
-  
+
   if (targetX > width - cellSize || targetX < 0 + cellSize) {
     targetMoveRight = !targetMoveRight;
   }
@@ -166,7 +180,8 @@ void drawCrosshair() {
   line(mouseX + cellSize / 2, mouseY, mouseX + cellSize / 4, mouseY);
 }
 
-// Tekent de aantal score en mis
+// Tekent de aantal score en mis.
+// Plus de precision
 void drawScore() {
   fill(white);
   textAlign(LEFT, TOP);
@@ -174,6 +189,24 @@ void drawScore() {
   String aantalScoreString = "Aantal score: ";
   String aantalMisString = "Aantal mis: ";
   text(aantalScoreString + aantalScore + " " + aantalMisString + aantalMis, 0, 0);
+  if (precision >= 0) {
+    switch(precision) {
+      case 4:
+        precisionText("Bullseye!");
+        break;
+      case 3:
+        precisionText("Goed zo!");
+        break;
+      case 2:
+        precisionText("Netjes!");
+        break;
+      case 1:
+        precisionText("Nice");
+        break;
+      default:
+        precisionText("Helaas pindakaas");
+    }
+  }
 }
 
 // Bekijkt of de muis over een gegeven object hovert
@@ -198,4 +231,17 @@ void startTargetX() {
   if (targetX > width - cellSize) {
     targetX = width - cellSize;
   }
+}
+
+// Boolean voor doelwit klikken
+boolean targetClicking(int size) {
+  if (checkMouse(targetX, (cellSize / 2) * size, targetY, (cellSize /2) * size))
+    return true;
+  else
+    return false;
+}
+
+// Precision text-opmaker
+void precisionText(String compliment) {
+  text(compliment + " +" + precision, 0, textSize);
 }
