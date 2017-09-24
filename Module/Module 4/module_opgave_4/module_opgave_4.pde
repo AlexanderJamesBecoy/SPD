@@ -30,6 +30,7 @@ color white = #ffffff,
   red = #ff0000, 
   green = #00ff00, 
   blue = #0000ff, 
+  yellow = #ffff00,
   black = #000000;
 
 // Check of de game start of stopt.
@@ -55,6 +56,7 @@ void setup() {
   startY = height - (startHeight / 2);
 
   smooth();
+  frameRate(60);
 }
 
 /*========================
@@ -196,18 +198,23 @@ void drawScore() {
   if (precision >= 0) {
     switch(precision) {
       case 4:
+        fill(yellow);
         precisionText("Bullseye!");
         break;
       case 3:
+        fill(blue);
         precisionText("Goed zo!");
         break;
       case 2:
+        fill(green);
         precisionText("Netjes!");
         break;
       case 1:
+        fill(white);
         precisionText("Nice");
         break;
       default:
+        fill(red);
         precisionText("Helaas pindakaas");
     }
   }
