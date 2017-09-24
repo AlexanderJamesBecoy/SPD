@@ -167,14 +167,15 @@ void draw() {
   line(0, midHeight, width, midHeight);
   
   /* Module 5 */
-  xSliderKnopLengte = xSlider + lengteInCm - minLengteInCm;
-  xSliderKnopGewicht = xSlider + gewichtInKg - minGewichtInKg;
+  xSliderKnopLengte = xSliderKnop(lengteInCm);
+  xSliderKnopGewicht = xSliderKnop(gewichtInKg);
   
   drawSlider("Lengte: ", lengteInCm, xSlider, ySliderLengte);
   drawSlider("Gewicht: ", gewichtInKg, xSlider, ySliderGewicht);
   
   if(checkMousePressed(xSliderKnopLengte, ySliderKnopLengte)
-  || checkMousePressed(xSliderKnopGewicht, ySliderKnopGewicht)) {
+  || checkMousePressed(xSliderKnopGewicht, ySliderKnopGewicht)
+  || sliderLengtePressed || sliderGewichtPressed) {
     cursor(HAND); 
   } else {
    cursor(POINT); 
@@ -200,16 +201,16 @@ void draw() {
 }
 
 void mousePressed() {
-  if(checkMousePressed(xSliderKnopLengte, ySliderKnopLengte)) {
+  if(checkMousePressed(xSliderKnopLengte, ySliderKnopLengte) && !sliderGewichtPressed) {
     sliderLengtePressed = true;
   } else
-  if(checkMousePressed(xSliderKnopGewicht, ySliderKnopGewicht)) {
+  if(checkMousePressed(xSliderKnopGewicht, ySliderKnopGewicht) && !sliderLengtePressed) {
     sliderGewichtPressed = true;
   }
 }
 
 void mouseReleased() {
-  if(sliderLengtePressed ^ sliderGewichtPressed) {
+  if(sliderLengtePressed || sliderGewichtPressed) {
     sliderLengtePressed = false;
     sliderGewichtPressed = false;
   }
