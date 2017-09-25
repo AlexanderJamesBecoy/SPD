@@ -3,12 +3,12 @@ float muurHoogte = 2.25;
 float rolBreedte = 0.52;
 float rolLengte = 10.0;
 
-float patroonHoogte = 0;
+float patronHoogte = 0.8;
 
 void setup() {
-  int aantalStroken = berekenAantalStroken(muurBreedte, rolBreedte);
-  int aantalStrokenPerRol = berekenAantalStrokenPerRol(muurHoogte, rolLengte);
-  println("Je hebt er " + berekenBenodigdeRollen(aantalStroken, aantalStrokenPerRol) + " rollen nodig.");
+  println("Je hebt er " + berekenAantalRollen(muurBreedte, muurHoogte, rolLengte, rolBreedte) + " rollen nodig.");
+  println("Je hebt er " + berekenAantalRollen(muurBreedte, muurHoogte, rolLengte, rolBreedte, patronHoogte) + 
+          " rollen nodig met een patronhoogte van " + patronHoogte + "m.");
 }
 
 int berekenAantalStroken(float muurBreedte, float rolBreedte) {
@@ -16,19 +16,25 @@ int berekenAantalStroken(float muurBreedte, float rolBreedte) {
   return ceil(aantal);
 }
 
-int berekenAantalStrokenPerRol(float muurHoogte, float rolLengte, float patroonHoogte) {
-  if (patroonHoogte > 0) {
-    muurHoogte = muurHoogte / patroonHoogte;
-  }
+int berekenAantalStrokenPerRol(float muurHoogte, float rolLengte) {
   float lengte = rolLengte / muurHoogte;
   return ceil(lengte);
 }
 
-int berekenAantalStrokenPerRol(float muurHoogte, float floatRolLengte) {
-  return berekenAantalStrokenPerRol(muurHoogte, floatRolLengte, 0);
+int berekenAantalRollen(float muurBreedte, float muurHoogte, float rolLengte, float rolBreedte, float patronHoogte) {
+  float knipLengte = berekenKnipLengte(patronHoogte, muurHoogte);
+  int aantal = berekenAantalRollen(muurBreedte, knipLengte, rolLengte, rolBreedte);
+  return aantal;
 }
 
-int berekenBenodigdeRollen(int aantalStroken, int aantalStrokenPerRol) {
-  float benodigdeRollen = (float)aantalStroken / (float)aantalStrokenPerRol;
-  return ceil(benodigdeRollen);
+int berekenAantalRollen(float muurBreedte, float muurHoogte, float rolLengte, float rolBreedte) {
+  int aantalStroken = berekenAantalStroken(muurBreedte, rolBreedte);
+  int aantalStrokenPerRol = berekenAantalStrokenPerRol(muurHoogte, rolLengte);
+  float aantal = float(aantalStroken) / aantalStrokenPerRol;
+  return ceil(aantal);
+}
+
+float berekenKnipLengte(float patronHoogte,float hoogteMuur) {
+  int aantal = ceil(hoogteMuur/patronHoogte);
+  return aantal * patronHoogte;
 }

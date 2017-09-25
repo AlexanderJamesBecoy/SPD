@@ -23,7 +23,7 @@ void drawSlider(String soortData, float grootheid, float xPos, float yPos) {
   noStroke();
   // Teken wit achtergrond en tekst
   fill(white);
-  rect(xPos, yPos, sliderLengte, sliderDikte);
+  rect(xPos, yPos, sliderLengte + sliderKnopBreedte, sliderDikte);
   textAlign(LEFT, TOP);
   text(soortData + grootheid + eenheid, xPos, yPos + sliderDikte);
   // Teken sliderknop
@@ -49,6 +49,8 @@ boolean checkMousePressed(float dataX, float dataY) {
   }
 }
 
+/* Heb deze twee functies, decreaseData en increaseData in
+een gecombineerd, want ze werken bijna hetzelfde. Van fouten moet je leren.
 float decreaseData(float data) {
   float minData = 0;
   if(data == lengteInCm)  minData = minLengteInCm;
@@ -72,6 +74,29 @@ float increaseData(float data) {
     return data;
   }
 }
+*/
+
+float changeData(float data) {
+  float minData, maxData, xSliderKnopData;
+  if(data == lengteInCm) {
+    minData = minLengteInCm;
+    maxData = maxLengteInCm;
+    xSliderKnopData = xSliderKnopLengte;
+  } else {
+    minData = minGewichtInKg;
+    maxData = maxGewichtInKg;
+    xSliderKnopData = xSliderKnopGewicht;
+  }
+  
+  if(mouseX < xSliderKnopData && data > minData) {
+    return data - 1.0;
+  } else
+  if(mouseX > xSliderKnopData + sliderKnopBreedte && data < maxData) {
+    return data + 1.0;
+  } else {
+    return data;
+  }
+}
 
 float xSliderKnop(float data) {
   boolean dataIsLengte = false;
@@ -84,15 +109,13 @@ float xSliderKnop(float data) {
   if(dataIsLengte) {
     minData = minLengteInCm;
     maxData = maxLengteInCm;
-    dataPercentage = (maxData - minData) / 100;
-    data = xSlider + data - minData;
   }
   if(dataIsGewicht) {
     minData = minGewichtInKg;
     maxData = maxGewichtInKg;
-    dataPercentage = (maxData - minData) / 100;
-    data = xSlider + data - minData;
   }
-  
+  float dataVerschil = maxData - minData;
+  float dataNaarPixel = sliderLengte / dataVerschil;
+  data = xSlider + (data * dataNaarPixel) - (minData * dataNaarPixel);
   return data;
 }

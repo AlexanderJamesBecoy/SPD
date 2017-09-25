@@ -71,7 +71,7 @@ EDIT: ik heb nog variabelen aangemaakt voor de coordinaten van beide sliders.
 // Data van lengte en gewicht
 float minLengteInCm = 50.0;
 float maxLengteInCm = 250.0;
-float lengteInCm = 250.0;
+float lengteInCm = 50.0;
 
 float minGewichtInKg = 10.0;
 float maxGewichtInKg = 200.0;
@@ -167,21 +167,26 @@ void draw() {
   line(0, midHeight, width, midHeight);
   
   /* Module 5 */
+  smooth();
+  
   xSliderKnopLengte = xSliderKnop(lengteInCm);
   xSliderKnopGewicht = xSliderKnop(gewichtInKg);
   
   drawSlider("Lengte: ", lengteInCm, xSlider, ySliderLengte);
   drawSlider("Gewicht: ", gewichtInKg, xSlider, ySliderGewicht);
   
+  if(sliderLengtePressed || sliderGewichtPressed) {
+   cursor(MOVE); 
+  } else
   if(checkMousePressed(xSliderKnopLengte, ySliderKnopLengte)
-  || checkMousePressed(xSliderKnopGewicht, ySliderKnopGewicht)
-  || sliderLengtePressed || sliderGewichtPressed) {
+  || checkMousePressed(xSliderKnopGewicht, ySliderKnopGewicht)) {
     cursor(HAND); 
   } else {
-   cursor(POINT); 
+    cursor(POINT);
   }
   
   // @TODO -- Dit in een functie opstellen
+  /*
   if(sliderLengtePressed) {
     if(mouseX < xSliderKnopLengte) {
       lengteInCm = decreaseData(lengteInCm);
@@ -198,6 +203,14 @@ void draw() {
       gewichtInKg = increaseData(gewichtInKg);
     }
   }
+  */
+  
+  if(sliderLengtePressed) {
+    lengteInCm = changeData(lengteInCm);
+  }
+  if(sliderGewichtPressed) {
+    gewichtInKg = changeData(gewichtInKg);
+  }
 }
 
 void mousePressed() {
@@ -210,7 +223,7 @@ void mousePressed() {
 }
 
 void mouseReleased() {
-  if(sliderLengtePressed || sliderGewichtPressed) {
+  if(sliderLengtePressed ^ sliderGewichtPressed) {
     sliderLengtePressed = false;
     sliderGewichtPressed = false;
   }
