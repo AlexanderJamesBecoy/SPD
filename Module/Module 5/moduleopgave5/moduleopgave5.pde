@@ -2,9 +2,6 @@
 // Alexander James Becoy
 // 22 september 2017
 
-import controlP5.*;
-ControlP5 theControl;
-
 // Het breedte and de x-waarde van de BMI-staaf wordt bepaalt door de grootte van
 // de x-waarde van de windows.
 int barWidth, barX, margin,
@@ -126,7 +123,7 @@ void draw() {
   background(50);
   
   // De BMI wordt berekend door de functie.
-  BMI = berekenBMI(leesGewicht(), leesLengte());
+  BMI = berekenBMI(gewichtInKg, lengteInCm);
   
   // Hier zitten de lijnen
   // Ondergewicht

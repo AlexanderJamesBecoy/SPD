@@ -49,33 +49,6 @@ boolean checkMousePressed(float dataX, float dataY) {
   }
 }
 
-/* Heb deze twee functies, decreaseData en increaseData in
-een gecombineerd, want ze werken bijna hetzelfde. Van fouten moet je leren.
-float decreaseData(float data) {
-  float minData = 0;
-  if(data == lengteInCm)  minData = minLengteInCm;
-  if(data == gewichtInKg)  minData = minGewichtInKg;
-  
-  if(data > minData) {
-    return data - 1.0;
-  } else {
-    return data;
-  }
-}
-
-float increaseData(float data) {
-  float maxData = 0;
-  if(data == lengteInCm)  maxData = maxLengteInCm;
-  if(data == gewichtInKg)  maxData = maxGewichtInKg;
-  
-  if(data < maxData) {
-    return data + 1.0;
-  } else {
-    return data;
-  }
-}
-*/
-
 float changeData(float data) {
   float minData, maxData, xSliderKnopData;
   if(data == lengteInCm) {

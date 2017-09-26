@@ -1,22 +1,3 @@
-Numberbox nb1, nb2;
-
-/**
-  Creates the two input fields   
-*/
-
-/**
-  Returns the length in cm  
-*/
-float leesLengte() {
-  return lengteInCm;
-}
-
-/**
-  Returns the weight in kg
-*/
-float leesGewicht() { 
-  return gewichtInKg;
-}
 
 /* Module 2 */
 
