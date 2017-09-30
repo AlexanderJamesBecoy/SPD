@@ -1,0 +1,10 @@
+SPD - Module 1 t/m 8
+
+Module 1: Programma's, rare typetjes en meer
+Module 2: Methoden, parameters, veldnamen en fouten
+Module 3: Structuur, interactie, voorwaarden en events
+Module 4: Methoden, parameters, scope en testen
+Module 5: Returnwaarden
+Module 6: Herhalingen/loops
+Module 7: Arrays
+Module 8: Analyse en ontwerp
