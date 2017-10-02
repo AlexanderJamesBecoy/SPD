@@ -1,34 +1,37 @@
-void speel_craps() {
-  int scoreEersteBeurt = gooiDobbelsteen();
-  switch(scoreEersteBeurt) {
-    case 7:
-      println("Ace! Your score: " + scoreEersteBeurt);
-      break;
-    case 2:
-    case 3:
-    case 12:
-      println("Instant lose! Your score: " + scoreEersteBeurt);
-      break;
-    default:
-      int aantalBeurten = 2;
-      int score;
-      boolean nietGescoord = true;
-      while(nietGescoord) {
-        score = gooiDobbelsteen();
-        if(score == scoreEersteBeurt) {
-          println("You win! Your score: " + score);
-          aantalBeurtenZien(aantalBeurten);
+boolean speel_craps() {
+  boolean heeftGewonnen = false;
+  int scoreEersteBeurt = gooiDubbeleDobbelStenen();
+  //println("Eerste beurt: " + scoreEersteBeurt);
+  if (scoreEersteBeurt == 7) {
+    println("Ace!");
+    heeftGewonnen = true;
+  } else
+  if (scoreEersteBeurt == 2 || scoreEersteBeurt == 3 || scoreEersteBeurt == 12) {
+    println("Instant verloren!");
+    heeftGewonnen = false;
+  } else {
+    //int aantalBeurten = 2;
+    int score;
+    boolean nietGescoord = true;
+    while (nietGescoord) {
+      score = gooiDubbeleDobbelStenen();
+      if (score == scoreEersteBeurt) {
+        println("Spare! Jouw score: " + score);
+        //aantalBeurtenZien(aantalBeurten);
+        nietGescoord = false;
+        heeftGewonnen = true;
+      } else if (score == 7) {
+          println("Verloren. Jouw score: " + score);
+          //aantalBeurtenZien(aantalBeurten);
           nietGescoord = false;
-        } else
-        if(score == 7) {
-          println("You hit rock bottom. Your score: " + score);
-          aantalBeurtenZien(aantalBeurten);
-          nietGescoord = false;
-        } else {
-          aantalBeurten++;
-        }
+          heeftGewonnen = false;
+      } else {
+        //aantalBeurten++;
       }
+    }
   }
+  
+  return heeftGewonnen;
 }
 
 void aantalBeurtenZien(int aantalBeurten) {
