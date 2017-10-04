@@ -4,9 +4,6 @@ PImage girl;
 int margin = 10;
 int imageWidth = 28;
 int imageHeight = 48;
-int amountOfFamilies = 100;
-float chanceOfMaleNumerator = 2;
-float chanceOfMaleDenominator = 5;
 int amountOfBoys = 0;
 int amountOfGirls = 0;
 
@@ -16,19 +13,7 @@ void setup() {
   boy = loadImage("jongetje.png");
   girl = loadImage("meisje.png");
   
-  for (int familyIndex = 0; familyIndex < amountOfFamilies; familyIndex++) {
-    boolean isMale = false;
-    if (!isMale) {
-      while (!isMale) {
-        if (random(chanceOfMaleDenominator) < chanceOfMaleNumerator) {
-          isMale = !isMale;
-          amountOfBoys++;
-        } else {
-          amountOfGirls++;
-        }
-      }
-    }
-  }
+  loopFamilies(100, 2);
   
   image(girl, xPosition(1), yPosition());
   image(boy, xPosition(2), yPosition());
@@ -42,10 +27,35 @@ void setup() {
   println("Jongens: " + amountOfBoys);
 }
 
+void loopFamilies(float amountOfFamilies, float chanceOfMaleDenominator) {
+  for (int familyIndex = 0; familyIndex < amountOfFamilies; familyIndex++) {
+    boolean isMale = false;
+    if (!isMale) {
+      while (!isMale) {
+        if (randomIsMale(chanceOfMaleDenominator)) {
+          isMale = !isMale;
+          amountOfBoys++;
+        } else {
+          amountOfGirls++;
+        }
+      }
+    }
+  }
+}
+
 float xPosition(int index) {
   return ((width / 3) * index) - (imageWidth / 2);
 }
 
 float yPosition() {
   return margin + (imageHeight / 2);
+}
+
+boolean randomIsMale(float chanceOfMaleDenominator) {
+  int isMale = round(random(1, chanceOfMaleDenominator));
+  if (isMale == 1) {
+    return true;
+  } else {
+    return false;
+  }
 }
