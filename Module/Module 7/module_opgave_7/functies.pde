@@ -74,10 +74,14 @@ int[] deelCijfers(float[] cijfers, int aantalKolommen)
   
   for (int cijfer = 0; cijfer < cijfers.length; cijfer++)
   {
-    int helftAfgerond = aantalKolommen / 2;
-    int afgerond = round((cijfers[cijfer] * aantalKolommen) / (aantalKolommen / 2));
-    int index = afgerond - 1;
-    gedeeldeCijfer[index] = gedeeldeCijfer[index] + 1;
+    //int helftAfgerond = aantalKolommen / 2;
+    //int afgerond = round((cijfers[cijfer] * aantalKolommen) / (aantalKolommen / 2));
+    //int index = afgerond - 1;
+    //gedeeldeCijfer[index] = gedeeldeCijfer[index] + 1;
+    float aantalVerschil = aantalKolommen / 10;
+    int cijferAfgerond = round(aantalVerschil * cijfers[cijfer]);
+    int index = cijferAfgerond - 1;
+    gedeeldeCijfer[index] = cijferAfgerond;
   }
   
   return gedeeldeCijfer;

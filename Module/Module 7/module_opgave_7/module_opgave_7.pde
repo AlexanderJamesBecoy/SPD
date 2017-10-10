@@ -13,5 +13,5 @@ void setup() {
   float[] cijferlijst = leesBestand(stringCijferlijst);
   
   tekenData(cijferlijst);
-  tekenStatistiek(cijferlijst, 10);
+  //tekenStatistiek(cijferlijst, 10);
 }
