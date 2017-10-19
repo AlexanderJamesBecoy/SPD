@@ -75,7 +75,7 @@ int[] deelCijfers(float[] cijfers, int aantalKolommen)
   for (int cijfer = 0; cijfer < cijfers.length; cijfer++)
   {
     float aantalVerschil = aantalKolommen / 10.0; //<>//
-    int cijferAfgerond = round(aantalVerschil * cijfers[cijfer]);
+    int cijferAfgerond = ceil(aantalVerschil * cijfers[cijfer]);
     int index = cijferAfgerond - 1;
     gedeeldeCijfer[index]++;
   }

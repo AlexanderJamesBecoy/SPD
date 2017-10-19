@@ -68,6 +68,7 @@ float[] leesBestand(String[] string_cijferlijst)
   return float_cijferlijst;
 }
 
+/*
 int[] deelCijfers(float[] cijfers, int aantalKolommen)
 {
   int[] gedeeldeCijfer = new int[aantalKolommen];
@@ -86,3 +87,4 @@ int[] deelCijfers(float[] cijfers, int aantalKolommen)
   
   return gedeeldeCijfer;
 }
+*/

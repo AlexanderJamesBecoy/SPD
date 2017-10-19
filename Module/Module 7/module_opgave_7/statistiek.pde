@@ -22,6 +22,7 @@ void tekenData(float[] cijfers)
   tekenTekst("Aantal onvoldoende", geefAantalOnvoldoendes(cijfers), 5);
 }
 
+/*
 void tekenStatistiek(float[] cijfers, int aantalKolommen)
 {
   noStroke();
@@ -51,3 +52,4 @@ void tekenStatistiek(float[] cijfers, int aantalKolommen)
     rect(aantalStaaf * breedteKolom + marge, topMarge + hoogte, breedteKolom, -gedeeldeCijferlijst[aantalStaaf] * zoomfactor);
   }
 }
+*/
